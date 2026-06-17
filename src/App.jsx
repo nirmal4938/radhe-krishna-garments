@@ -99,6 +99,10 @@ export default function App() {
           ⚡ Fast Response Guaranteed | 📍 Local Store
         </p>
       </section>
+      <div className="bg-[#8B1E3F] text-white py-3 text-center text-sm font-semibold">
+        ⚡ GRAND OPENING OFFER: पहले 100 ग्राहकों के लिए SPECIAL DISCOUNT +
+        SURPRISE GIFTS
+      </div>
 
       {/* ================= TRUST STRIP ================= */}
       <section className="bg-white py-6 border-b">
@@ -116,7 +120,38 @@ export default function App() {
           </span>
         </div>
       </section>
+      {/* ================= BRAND STORY (LEVEL 100 ADDITION) ================= */}
+      <section className="py-24 px-6 bg-white text-center relative overflow-hidden">
+        <div className="absolute w-[300px] h-[300px] bg-[#D4AF37]/10 blur-3xl rounded-full top-[-80px] left-[-80px]" />
 
+        <h2 className="text-4xl font-black text-[#8B1E3F]">हमारी कहानी</h2>
+
+        <p className="mt-6 max-w-3xl mx-auto text-gray-700 text-lg leading-relaxed">
+          Radhe Krishna Garments सिर्फ एक दुकान नहीं है — यह एक विश्वास है।
+          वर्षों से हम Simrahi Bazaar में परिवारों को गुणवत्ता, परंपरा और आधुनिक
+          फैशन का सही संतुलन प्रदान कर रहे हैं।
+        </p>
+
+        <p className="mt-4 max-w-2xl mx-auto text-gray-500">
+          हमारा उद्देश्य सिर्फ कपड़े बेचना नहीं, बल्कि हर ग्राहक को “खुश और
+          आत्मविश्वासी” बनाना है।
+        </p>
+
+        {/* trust chips */}
+        <div className="flex flex-wrap justify-center gap-3 mt-10">
+          <span className="px-4 py-2 bg-[#FFF7F0] border rounded-full text-sm">
+            👨‍👩‍👧 Family Trusted Store
+          </span>
+
+          <span className="px-4 py-2 bg-[#FFF7F0] border rounded-full text-sm">
+            🏆 Premium Quality Assurance
+          </span>
+
+          <span className="px-4 py-2 bg-[#FFF7F0] border rounded-full text-sm">
+            🧵 Traditional + Modern Fashion
+          </span>
+        </div>
+      </section>
       {/* ================= COLLECTION ================= */}
       <section className="py-24 px-6 max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-black text-[#8B1E3F]">
@@ -150,6 +185,29 @@ export default function App() {
             <h3 className="font-bold mt-4 text-lg">Kids Wear</h3>
             <p className="text-gray-500 mt-2">
               Comfortable • Trendy • Affordable Fashion
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 text-center bg-gradient-to-b from-[#FFF7F0] to-white">
+        <h2 className="text-4xl font-black text-[#8B1E3F]">Opening Offers</h2>
+
+        <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-6xl mx-auto">
+          <div className="bg-white p-8 rounded-2xl shadow-xl border">
+            🎁 <h3 className="font-bold mt-2">Special Discount</h3>
+            <p className="text-gray-500 mt-2">Grand opening limited offers</p>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl shadow-xl border">
+            🛍️ <h3 className="font-bold mt-2">Combo Deals</h3>
+            <p className="text-gray-500 mt-2">Buy more save more pricing</p>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl shadow-xl border">
+            🎉 <h3 className="font-bold mt-2">Gift on Purchase</h3>
+            <p className="text-gray-500 mt-2">
+              Surprise gifts for first buyers
             </p>
           </div>
         </div>
