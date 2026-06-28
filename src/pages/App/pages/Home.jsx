@@ -1,13 +1,13 @@
-import { useState } from "react";
-import NavBar from "./pages/App/components/NavBar";
-import Home from "./pages/App/pages/Home";
-import Shop from "./pages/App/pages/Shop";
-import Dashboard from "./pages/App/pages/Dashboard";
-import useLeads from "./pages/App/hooks/useLeads";
+import Hero from "../components/Hero";
+import CollectionGrid from "../components/CollectionGrid";
+import Testimonials from "../components/Testimonials";
+import LocationSection from "../components/LocationSection";
+import Footer from "../components/Footer";
+import { Star, TrendingUp, BadgeCheck } from "lucide-react";
 import { MessageCircle } from "lucide-react";
+import useLeads from "../hooks/useLeads";
 
-export default function App() {
-  const [page, setPage] = useState("home");
+export default function Home() {
   const {
     leads,
     leadForm,
@@ -19,12 +19,35 @@ export default function App() {
 
   return (
     <div className="bg-[#FFF7F0] min-h-screen">
-      <NavBar page={page} setPage={setPage} />
-
-      {page === "home" && <Home />}
-      {page === "shop" && <Shop />}
-      {page === "dashboard" && <Dashboard leads={leads} />}
-
+      {/* HERO */}
+      <Hero />
+      {/* OFFER STRIP */}
+      <div className="bg-gradient-to-r from-[#8B1E3F] to-[#4a0d1f] text-white py-3 text-center font-semibold">
+        🎁 Limited Opening Offer - Flat Discounts + Gifts
+      </div>
+      {/* TRUST */}
+      <section className="bg-white py-12 text-center">
+        <div className="flex justify-center gap-10 text-gray-600">
+          <span className="flex items-center gap-2">
+            <Star /> Premium
+          </span>
+          <span className="flex items-center gap-2">
+            <TrendingUp /> Trending
+          </span>
+          <span className="flex items-center gap-2">
+            <BadgeCheck /> Trusted
+          </span>
+        </div>
+      </section>
+      {/* COLLECTION */}
+      <CollectionGrid />
+      {/* ================= CUSTOMER LOVE ================= */}
+      <Testimonials />
+      {/* LOCATION */}
+      <LocationSection />
+      {/* FOOTER */}
+      <Footer />
+      {/* LEAD MODAL */}
       {showLeadModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] flex items-center justify-center p-5">
           <div className="bg-white rounded-[32px] w-full max-w-md shadow-[0_25px_100px_rgba(0,0,0,0.3)] overflow-hidden">
