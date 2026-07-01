@@ -3,13 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 
 // Pages
-import Home from "../pages/Home";
-import Products from "../pages/Products";
-import Collections from "../pages/Collections";
-import Offers from "../pages/Offers";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
-import NotFound from "../pages/NotFound";
+import Home from "../pages/Home/Index";
+import Products from "../pages/Products/Index";
+import Collections from "../pages/Collections/Index";
+import Offers from "../pages/Offers/Index";
+import About from "../pages/About/Index";
+import Contact from "../pages/Contact/Index";
+import NotFound from "../pages/NotFound/Index";
 
 // Layout
 import PublicLayout from "../layouts/PublicLayout";
