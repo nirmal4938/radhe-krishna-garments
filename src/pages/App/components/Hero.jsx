@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logo from "../../../assets/rk-logo.png";
+import { useTenant } from "../../../context/TenantContext";
 
 export default function Hero() {
-  const slides = [
+  const { currentTenant } = useTenant();
+
+  // Default slides - can be overridden by tenant config
+  const defaultSlides = [
     {
       title: "Premium Ethnic Wear",
       desc: "Elegance meets tradition",
@@ -19,6 +22,14 @@ export default function Hero() {
     },
   ];
 
+  const slides = currentTenant.catalog?.heroSlides || defaultSlides;
+  const logo = currentTenant.logo || "/assets/rk-logo.png";
+  const businessName = currentTenant.name || "Radhe Krishna Garments";
+  const tagline =
+    currentTenant.description || "Premium Ethnic Fashion Experience";
+  const primaryColor = currentTenant.primaryColor || "#8B1E3F";
+  const secondaryColor = currentTenant.secondaryColor || "#D4AF37";
+
   const [slideIndex, setSlideIndex] = useState(0);
   const heroRef = useRef();
 
@@ -27,7 +38,7 @@ export default function Hero() {
       setSlideIndex((prev) => (prev + 1) % slides.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   const nextSlide = () => setSlideIndex((prev) => (prev + 1) % slides.length);
   const prevSlide = () =>
@@ -50,10 +61,10 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-[#12040a] via-[#8B1E3F] to-[#12040a] text-white relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-var(--text-color) via-var(--primary-color) to-var(--text-color) text-white relative overflow-hidden"
     >
-      <div className="absolute w-[600px] h-[600px] bg-[#D4AF37]/20 blur-3xl rounded-full top-[-200px] left-[-200px]" />
-      <div className="absolute w-[450px] h-[450px] bg-[#D4AF37]/10 blur-3xl rounded-full bottom-[-180px] right-[-180px]" />
+      <div className="absolute w-[600px] h-[600px] bg-[var(--secondary-color)]/20 blur-3xl rounded-full top-[-200px] left-[-200px]" />
+      <div className="absolute w-[450px] h-[450px] bg-[var(--secondary-color)]/10 blur-3xl rounded-full bottom-[-180px] right-[-180px]" />
 
       <img
         src={logo}
@@ -69,7 +80,7 @@ export default function Hero() {
       </h1>
 
       <h2 className="hero-box text-3xl md:text-5xl font-bold mt-4">
-        <span className="text-[#D4AF37]">Radhe Krishna</span> Garments
+        <span className="text-[var(--secondary-color)]">{businessName}</span>
       </h2>
 
       {/* ===== CAROUSEL ===== */}
@@ -79,8 +90,10 @@ export default function Hero() {
         </button>
 
         <div className="text-center transition-all duration-700">
-          <p className="text-xl font-bold">{slides[slideIndex].title}</p>
-          <p className="text-sm text-white/70">{slides[slideIndex].desc}</p>
+          <p className="text-xl font-bold">{slides[slideIndex]?.title || ""}</p>
+          <p className="text-sm text-white/70">
+            {slides[slideIndex]?.desc || ""}
+          </p>
         </div>
 
         <button onClick={nextSlide} className="absolute right-0">

@@ -1,13 +1,19 @@
-import Hero from "../components/Hero";
-import CollectionGrid from "../components/CollectionGrid";
-import Testimonials from "../components/Testimonials";
-import LocationSection from "../components/LocationSection";
-import Footer from "../components/Footer";
-import { Star, TrendingUp, BadgeCheck } from "lucide-react";
-import { MessageCircle } from "lucide-react";
-import useLeads from "../hooks/useLeads";
+import { useEffect, useState, useContext } from "react";
+
+import Hero from "../../components/Hero";
+import CollectionGrid from "../../components/CollectionGrid";
+import Testimonials from "../../components/Testimonials";
+import LocationSection from "../../components/LocationSection";
+import Footer from "../../components/Footer";
+
+import { Star, TrendingUp, BadgeCheck, MessageCircle } from "lucide-react";
+import useLeads from "../../hooks/useLeads";
+
+import { BusinessContext } from "../../context/BusinessContext";
 
 export default function Home() {
+  const { business } = useContext(BusinessContext);
+
   const {
     leads,
     leadForm,
@@ -18,76 +24,118 @@ export default function Home() {
   } = useLeads();
 
   return (
-    <div className="bg-[#FFF7F0] min-h-screen">
-      {/* HERO */}
-      <Hero />
+    <div className="min-h-screen bg-[#FFF7F0]">
+      {/* ===================================================== */}
+      {/* HERO (FULLY DYNAMIC - BUSINESS DRIVEN) */}
+      {/* ===================================================== */}
+
+      <Hero
+        data={{
+          title:
+            business?.home?.hero?.title ||
+            `Welcome to ${business?.name || "Our Store"}`,
+
+          subtitle:
+            business?.home?.hero?.subtitle ||
+            business?.description ||
+            "Discover premium products curated just for you",
+
+          ctaPrimary: business?.home?.hero?.ctaPrimary || "Shop Now",
+
+          ctaSecondary:
+            business?.home?.hero?.ctaSecondary || "Explore Collections",
+
+          backgroundImage: business?.home?.hero?.backgroundImage || "",
+        }}
+      />
+
       {/* OFFER STRIP */}
-      <div className="bg-gradient-to-r from-[#8B1E3F] to-[#4a0d1f] text-white py-3 text-center font-semibold">
-        🎁 Limited Opening Offer - Flat Discounts + Gifts
+      <div className="bg-gradient-to-r from-[#8B1E3F] to-[#4a0d1f] py-3 text-center font-semibold text-white">
+        🎁 {business?.name || "Store"} - Limited Time Opening Offers
       </div>
-      {/* TRUST */}
+
+      {/* TRUST SECTION */}
       <section className="bg-white py-12 text-center">
         <div className="flex justify-center gap-10 text-gray-600">
           <span className="flex items-center gap-2">
             <Star /> Premium
           </span>
+
           <span className="flex items-center gap-2">
             <TrendingUp /> Trending
           </span>
+
           <span className="flex items-center gap-2">
             <BadgeCheck /> Trusted
           </span>
         </div>
       </section>
-      {/* COLLECTION */}
+
+      {/* COLLECTIONS */}
       <CollectionGrid />
-      {/* ================= CUSTOMER LOVE ================= */}
+
+      {/* TESTIMONIALS */}
       <Testimonials />
+
       {/* LOCATION */}
       <LocationSection />
-      {/* FOOTER */}
-      <Footer />
+
+      {/* ===================================================== */}
       {/* LEAD MODAL */}
+      {/* ===================================================== */}
+
       {showLeadModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] flex items-center justify-center p-5">
-          <div className="bg-white rounded-[32px] w-full max-w-md shadow-[0_25px_100px_rgba(0,0,0,0.3)] overflow-hidden">
-            <div className="p-8 space-y-5">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 p-5 backdrop-blur-sm">
+          <div className="w-full max-w-md rounded-[32px] bg-white shadow-2xl">
+            <div className="space-y-5 p-8">
+              <h2 className="text-xl font-bold">
+                Get Best Offers from {business?.name || "Store"}
+              </h2>
+
+              {/* NAME */}
               <div>
                 <label className="text-sm font-semibold text-gray-700">
                   Your Name
                 </label>
+
                 <input
                   value={leadForm.name}
                   onChange={(e) =>
                     setLeadForm({ ...leadForm, name: e.target.value })
                   }
-                  className="w-full mt-2 p-4 rounded-2xl border border-[#8B1E3F] outline-none focus:ring-2 focus:ring-[#8B1E3F]"
+                  className="mt-2 w-full rounded-2xl border border-[#8B1E3F] p-4 outline-none focus:ring-2 focus:ring-[#8B1E3F]"
                   placeholder="Enter your name"
                 />
               </div>
+
+              {/* PHONE */}
               <div>
                 <label className="text-sm font-semibold text-gray-700">
                   Mobile Number
                 </label>
+
                 <input
                   value={leadForm.phone}
                   onChange={(e) =>
                     setLeadForm({ ...leadForm, phone: e.target.value })
                   }
-                  className="w-full mt-2 p-4 rounded-2xl border border-[#8B1E3F] outline-none focus:ring-2 focus:ring-[#8B1E3F]"
+                  className="mt-2 w-full rounded-2xl border border-[#8B1E3F] p-4 outline-none focus:ring-2 focus:ring-[#8B1E3F]"
                   placeholder="98XXXXXXXX"
                 />
               </div>
+
+              {/* INTEREST */}
               <div>
                 <label className="text-sm font-semibold text-gray-700">
                   Interested In
                 </label>
+
                 <select
                   value={leadForm.interest}
                   onChange={(e) =>
                     setLeadForm({ ...leadForm, interest: e.target.value })
                   }
-                  className="w-full mt-2 p-4 rounded-2xl border border-[#8B1E3F] outline-none focus:ring-2 focus:ring-[#8B1E3F]"
+                  className="mt-2 w-full rounded-2xl border border-[#8B1E3F] p-4 outline-none focus:ring-2 focus:ring-[#8B1E3F]"
                 >
                   <option>Women Sarees</option>
                   <option>Men Fashion</option>
@@ -95,15 +143,19 @@ export default function Home() {
                   <option>Wedding Collection</option>
                 </select>
               </div>
+
+              {/* CTA */}
               <button
                 onClick={saveLead}
-                className="w-full bg-green-500 text-white font-bold py-4 rounded-2xl hover:scale-105 transition shadow-xl"
+                className="w-full rounded-2xl bg-green-500 py-4 font-bold text-white shadow-xl transition hover:scale-105"
               >
-                <MessageCircle className="inline mr-2" /> Get Offer On WhatsApp
+                <MessageCircle className="mr-2 inline" />
+                Get Offer on WhatsApp
               </button>
+
               <button
                 onClick={() => setShowLeadModal(false)}
-                className="w-full text-gray-500 text-sm hover:text-black"
+                className="w-full text-sm text-gray-500 hover:text-black"
               >
                 Close
               </button>
@@ -111,6 +163,9 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
