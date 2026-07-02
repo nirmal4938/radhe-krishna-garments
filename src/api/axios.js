@@ -26,7 +26,7 @@ import ENV from "@/config/env";
 import { APP } from "@/config/constants";
 
 const api = axios.create({
-  baseURL: ENV.BASE_URL,
+  baseURL: ENV.API_BASE_URL,
   timeout: ENV.TIMEOUT,
 
   headers: {
