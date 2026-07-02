@@ -5,27 +5,36 @@ import { useEffect, useMemo, useState } from "react";
 import StorefrontContext from "../context/StorefrontContext";
 import storefrontService from "../services/storefront.service";
 
+// Bootstrap Screens
+import SplashScreen from "../pages/Bootstrap/SplashScreen";
+import StoreNotFoundPage from "../pages/Bootstrap/StoreNotFound";
+import BootstrapErrorPage from "../pages/Bootstrap/BootstrapError";
+
+const initialBootstrap = {
+  business: null,
+  settings: null,
+  theme: null,
+  navigation: null,
+  home: null,
+  collections: [],
+  products: [],
+  offers: [],
+  reviews: [],
+  seo: null,
+};
+
 export default function StorefrontProvider({ children }) {
-  const [loading, setLoading] = useState(true);
+  const [bootstrap, setBootstrap] = useState(initialBootstrap);
 
   const [error, setError] = useState(null);
-  //   loading;
-  //   ready;
-  //   not - found;
-  //   error;
-  const [storeStatus, setStoreStatus] = useState("loading");
-  const [bootstrap, setBootstrap] = useState({
-    business: null,
-    settings: null,
-    theme: null,
-    navigation: null,
-    home: null,
-    collections: [],
-    products: [],
-    offers: [],
-    reviews: [],
-    seo: null,
-  });
+
+  /**
+   * booting
+   * ready
+   * store-not-found
+   * bootstrap-error
+   */
+  const [storeStatus, setStoreStatus] = useState("booting");
 
   useEffect(() => {
     initializeStorefront();
@@ -33,9 +42,8 @@ export default function StorefrontProvider({ children }) {
 
   async function initializeStorefront() {
     try {
-      setLoading(true);
       setError(null);
-      setStoreStatus("loading");
+      setStoreStatus("booting");
 
       const response = await storefrontService.bootstrap();
 
@@ -43,39 +51,57 @@ export default function StorefrontProvider({ children }) {
 
       setStoreStatus("ready");
     } catch (err) {
-      if (err.response?.status === 404) {
-        setStoreStatus("not-found");
-      } else {
-        setStoreStatus("error");
+      setError(err);
+
+      if (
+        err.response?.status === 404 &&
+        err.response?.data?.code === "STORE_NOT_FOUND"
+      ) {
+        setStoreStatus("store-not-found");
+        return;
       }
 
-      setError(err);
-    } finally {
-      setLoading(false);
+      setStoreStatus("bootstrap-error");
     }
   }
 
-  const refreshStorefront = async () => {
+  async function refreshStorefront() {
     await initializeStorefront();
-  };
+  }
 
   const value = useMemo(
     () => ({
       ...bootstrap,
 
-      loading,
       error,
 
       storeStatus,
 
       refreshStorefront,
     }),
-    [bootstrap, loading, error, storeStatus],
+    [bootstrap, error, storeStatus],
   );
 
-  return (
-    <StorefrontContext.Provider value={value}>
-      {children}
-    </StorefrontContext.Provider>
-  );
+  // ------------------------------------------------------------
+  // Bootstrap Gatekeeper
+  // ------------------------------------------------------------
+
+  switch (storeStatus) {
+    case "booting":
+      return <SplashScreen />;
+
+    case "store-not-found":
+      return <StoreNotFoundPage />;
+
+    case "bootstrap-error":
+      return <BootstrapErrorPage error={error} />;
+
+    case "ready":
+    default:
+      return (
+        <StorefrontContext.Provider value={value}>
+          {children}
+        </StorefrontContext.Provider>
+      );
+  }
 }

@@ -1,0 +1,146 @@
+.bootstrap-splash {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #f8fafc, #eef4ff);
+}
+
+.bootstrap-card {
+  width: 520px;
+  max-width: 92%;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  padding: 48px;
+
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+}
+
+.bootstrap-logo {
+  margin-bottom: 20px;
+}
+
+.bootstrap-logo__circle {
+  width: 84px;
+  height: 84px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  animation: pulse 1.8s infinite ease-in-out;
+}
+
+.bootstrap-title {
+  font-size: 30px;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  margin-bottom: 8px;
+}
+
+.bootstrap-subtitle {
+  color: #64748b;
+
+  margin-bottom: 36px;
+
+  font-size: 16px;
+}
+
+.bootstrap-progress {
+  height: 8px;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  background: #e5e7eb;
+
+  margin-bottom: 36px;
+}
+
+.bootstrap-progress__bar {
+  width: 45%;
+
+  height: 100%;
+
+  background: #2563eb;
+
+  animation: progress 1.5s infinite;
+}
+
+.bootstrap-steps {
+  text-align: left;
+
+  margin-bottom: 32px;
+}
+
+.bootstrap-step {
+  padding: 10px 0;
+
+  border-bottom: 1px solid #f3f4f6;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+.bootstrap-step.active {
+  color: #111827;
+
+  font-weight: 600;
+}
+
+.bootstrap-footer {
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 15%;
+  }
+
+  50% {
+    width: 70%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
