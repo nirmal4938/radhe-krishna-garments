@@ -8,8 +8,8 @@ export default {
   },
   typography: {
     fontFamily: "Roboto, sans-serif",
-    h1: { fontSize: "2rem", fontWeight: 600 },
-    h2: { fontSize: "1.5rem", fontWeight: 500 },
+    h1: { fontSize: "4.5rem", fontWeight: 800 },
+    h2: { fontSize: "2.875rem", fontWeight: 800 },
   },
   shape: {
     borderRadius: 4,
@@ -66,6 +66,37 @@ export default {
     },
   },
   custom: {
-    // Add restaurant-specific overrides if needed
+    hero: {
+      imageRadius: 4,
+      imageElevation: 10,
+      floatingCardRadius: 3,
+      primaryButtonVariant: "contained",
+      secondaryButtonVariant: "outlined",
+      layout: "split",
+      showStats: true,
+      showOfferCard: true,
+      showVerifiedCard: true,
+    },
+    trust: { cardRadius: 3, cardElevation: 0, hoverShadow: 8 },
+    products: {
+      cardRadius: 3,
+      imageRadius: 2,
+      cardElevation: 0,
+      hoverShadow: 10,
+      showWishlist: false,
+      cardStyle: "menu",
+    },
+    collections: {
+      cardRadius: 3,
+      cardElevation: 0,
+      hoverShadow: 10,
+      featureFirst: true,
+    },
+    offers: { cardRadius: 4, cardElevation: 0, variant: "gradient" },
+    reviews: { cardRadius: 3, cardElevation: 2, hoverShadow: 8 },
+    newsletter: { radius: 4, elevation: 0, variant: "dark", inputRadius: 2 },
+    footerCta: { buttonVariant: "contained" },
+    loading: { indicatorSize: 56 },
+    error: { radius: 3, elevation: 6 },
   },
 };

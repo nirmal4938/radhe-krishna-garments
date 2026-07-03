@@ -8,8 +8,8 @@ export default {
   },
   typography: {
     fontFamily: '"Playfair Display", Georgia, serif',
-    h1: { fontSize: "3rem", fontWeight: 700, letterSpacing: "0.05em" },
-    h2: { fontSize: "2rem", fontWeight: 600, letterSpacing: "0.02em" },
+    h1: { fontSize: "5rem", fontWeight: 800, letterSpacing: 0 },
+    h2: { fontSize: "3rem", fontWeight: 800, letterSpacing: 0 },
   },
   shape: {
     borderRadius: 0,
@@ -20,7 +20,7 @@ export default {
       styleOverrides: {
         root: {
           textTransform: "uppercase",
-          letterSpacing: "0.1em",
+          letterSpacing: 0,
           borderRadius: 0,
           background: "linear-gradient(135deg, #000000, #ffd700)",
           color: "#ffffff",
@@ -71,5 +71,38 @@ export default {
       },
     },
   },
-  custom: {},
+  custom: {
+    hero: {
+      imageRadius: 0,
+      imageElevation: 16,
+      floatingCardRadius: 0,
+      primaryButtonVariant: "contained",
+      secondaryButtonVariant: "outlined",
+      layout: "split",
+      showStats: true,
+      showOfferCard: true,
+      showVerifiedCard: true,
+    },
+    trust: { cardRadius: 0, cardElevation: 0, hoverShadow: 12 },
+    products: {
+      cardRadius: 0,
+      imageRadius: 0,
+      cardElevation: 0,
+      hoverShadow: 14,
+      showWishlist: true,
+      cardStyle: "luxury",
+    },
+    collections: {
+      cardRadius: 0,
+      cardElevation: 0,
+      hoverShadow: 14,
+      featureFirst: true,
+    },
+    offers: { cardRadius: 0, cardElevation: 0, variant: "gradient" },
+    reviews: { cardRadius: 0, cardElevation: 2, hoverShadow: 12 },
+    newsletter: { radius: 0, elevation: 0, variant: "dark", inputRadius: 0 },
+    footerCta: { buttonVariant: "contained" },
+    loading: { indicatorSize: 56 },
+    error: { radius: 0, elevation: 6 },
+  },
 };

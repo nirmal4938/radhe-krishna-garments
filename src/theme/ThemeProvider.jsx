@@ -26,7 +26,7 @@ const themeMap = {
 
 export default function ThemeProvider({ children }) {
   const { business } = useContext(StorefrontContext);
-  console.log("business", business);
+  //   console.log("business", business);
   //   const categoryKey = business?.category?.key || "default";
   //   const themeName = getTheme(categoryKey);
   //   const themeDefinition = themeMap[themeName] || defaultTheme;
@@ -35,7 +35,7 @@ export default function ThemeProvider({ children }) {
   const themeDefinition = getTheme(business?.category?.key);
 
   const muiTheme = createStoreTheme(themeDefinition);
-
+  console.log("mui theme", muiTheme);
   return (
     <MuiThemeProvider theme={muiTheme}>
       <CssBaseline />
