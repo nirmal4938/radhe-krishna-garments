@@ -1,5 +1,6 @@
-import { useContext } from "react";
+// src/components/Home/NewsletterSection.jsx
 
+import { useContext } from "react";
 import {
   Box,
   Button,
@@ -9,132 +10,113 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
-import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
 import StorefrontContext from "../../context/StorefrontContext";
 
 export default function NewsletterSection() {
   const theme = useTheme();
-  const {
-    business,
-    home,
-    products,
-    collections,
-    offers,
-    reviews,
-    theme: currentTheme,
-  } = useContext(StorefrontContext);
 
-  const newsletterConfig = theme.custom?.newsletter || {};
-  const runtimeNewsletter = currentTheme?.newsletter || {};
-  const darkVariant =
-    runtimeNewsletter.variant || newsletterConfig.variant || "dark";
-  const isDark = darkVariant === "dark";
+  const { business, home } = useContext(StorefrontContext);
+
+  const newsletter = theme.custom?.newsletter ?? {};
 
   return (
     <Box
       component="section"
-      sx={{ py: { xs: 8, md: 12 }, bgcolor: "background.default" }}
+      sx={{
+        py: { xs: 6, md: 8 },
+        bgcolor: "background.default",
+      }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Paper
-          elevation={newsletterConfig.elevation || 0}
+          elevation={newsletter.elevation ?? 0}
           sx={{
-            position: "relative",
-            overflow: "hidden",
-            p: { xs: 4, md: 8 },
-            textAlign: "center",
-            borderRadius: newsletterConfig.radius || 4,
-            color: isDark ? "primary.contrastText" : "text.primary",
-            bgcolor: isDark ? "primary.main" : "background.paper",
+            borderRadius: newsletter.radius ?? theme.shape.borderRadius * 2,
+            bgcolor: "background.paper",
             border: 1,
             borderColor: "divider",
-            background: isDark
-              ? `linear-gradient(135deg, ${theme.palette.primary.main}, ${
-                  theme.palette.primary.dark || theme.palette.primary.main
-                })`
-              : undefined,
+            p: {
+              xs: 3,
+              md: 5,
+            },
+            textAlign: "center",
           }}
         >
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              background: `radial-gradient(circle at 90% 18%, ${alpha(
-                theme.palette.secondary.main,
-                0.32,
-              )}, transparent 30%)`,
-              pointerEvents: "none",
-            }}
-          />
+          <Typography variant="h4" fontWeight={700} gutterBottom>
+            {home?.newsletter?.title ??
+              `Stay connected with ${business?.name || "our store"}`}
+          </Typography>
 
-          <Stack spacing={3} alignItems="center" sx={{ position: "relative" }}>
-            <Box
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              mb: 4,
+              maxWidth: 560,
+              mx: "auto",
+            }}
+          >
+            {home?.newsletter?.subtitle ??
+              "Subscribe to receive product launches, offers and exclusive updates."}
+          </Typography>
+
+          <Stack
+            direction={{
+              xs: "column",
+              md: "row",
+            }}
+            sx={{
+              maxWidth: 650,
+              mx: "auto",
+              border: 1,
+              borderColor: "divider",
+              borderRadius: 999,
+              overflow: "hidden",
+              bgcolor: "background.default",
+            }}
+          >
+            <TextField
+              fullWidth
+              placeholder="Enter your email address"
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+              }}
               sx={{
-                width: theme.spacing(7),
-                height: theme.spacing(7),
-                borderRadius: "50%",
-                display: "grid",
-                placeItems: "center",
-                bgcolor: alpha(theme.palette.common.white, isDark ? 0.16 : 0.8),
-                color: isDark ? "inherit" : "primary.main",
+                px: 3,
+
+                "& .MuiInputBase-root": {
+                  height: 56,
+                },
+
+                "& input": {
+                  py: 0,
+                },
+              }}
+            />
+
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: {
+                  xs: "100%",
+                  md: 180,
+                },
+
+                borderRadius: 0,
+
+                px: 5,
+
+                height: 56,
+
+                flexShrink: 0,
               }}
             >
-              <MailOutlineRoundedIcon />
-            </Box>
-
-            <Typography variant="overline" fontWeight={800} sx={{ opacity: 0.8 }}>
-              Stay Updated
-            </Typography>
-            <Typography variant="h2" fontWeight={900}>
-              {home?.newsletter?.title || "Never miss a new arrival"}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ opacity: 0.86, maxWidth: 700, lineHeight: 1.8 }}
-            >
-              {home?.newsletter?.subtitle ||
-                `Get launches, offers and collection notes from ${
-                  business?.name || "our store"
-                } across ${
-                  products?.length || collections?.length || "new"
-                } picks${
-                  offers?.length || reviews?.length
-                    ? `, including ${offers?.length || 0} offers and ${
-                        reviews?.length || 0
-                      } customer notes`
-                    : ""
-                }.`}
-            </Typography>
-
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              sx={{ width: "100%", maxWidth: 680, pt: 1 }}
-            >
-              <TextField
-                fullWidth
-                placeholder="Enter your email"
-                variant="outlined"
-                InputProps={{
-                  sx: {
-                    bgcolor: "background.paper",
-                    borderRadius: newsletterConfig.inputRadius || 2,
-                  },
-                }}
-              />
-              <Button
-                variant={runtimeNewsletter.buttonVariant || "contained"}
-                color="secondary"
-                size="large"
-                sx={{ minWidth: { sm: theme.spacing(20) } }}
-              >
-                Subscribe
-              </Button>
-            </Stack>
+              Subscribe
+            </Button>
           </Stack>
-
         </Paper>
       </Container>
     </Box>

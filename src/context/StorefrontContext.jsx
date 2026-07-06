@@ -32,16 +32,19 @@ const StorefrontContext = createContext({
   loading: true,
   error: null,
   storeStatus: "loading",
+
   business: null,
-  settings: null,
-  theme: null,
+
   navigation: null,
+
   home: null,
+
   collections: [],
-  products: [],
-  offers: [],
-  reviews: [],
+
+  recommendedProducts: [],
+
   seo: null,
+
   refreshStorefront: async () => {},
 });
 

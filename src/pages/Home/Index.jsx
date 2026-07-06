@@ -7,12 +7,14 @@ import ErrorState from "./ErrorState";
 import LoadingState from "./LoadingState";
 import HeroSection from "./HeroSection";
 import TrustSection from "./TrustSection";
-import CollectionsSection from "./CollectionsSection";
+import { CollectionSection } from "./CollectionsSection";
 import ProductsSection from "./ProductsSection";
 import OffersSection from "./OffersSection";
 import ReviewsSection from "./ReviewsSection";
 import NewsletterSection from "./NewsletterSection";
 import FooterCTA from "./FooterCTA";
+import CategoryShowcaseSection from "./CategoryShowcaseSection";
+import { RecommendedSection } from "./RecommendedSection";
 
 export default function Home() {
   const { error, storeStatus, refreshStorefront } =
@@ -29,13 +31,16 @@ export default function Home() {
   return (
     <Box component="main" sx={{ bgcolor: "background.default" }}>
       <HeroSection />
-      <TrustSection />
-      <CollectionsSection />
-      <ProductsSection />
-      <OffersSection />
-      <ReviewsSection />
+      {/* <TrustSection /> */}
+      <CategoryShowcaseSection />
+      <CollectionSection />
+      <CategoryShowcaseSection />
+      <RecommendedSection />
+      {/* <ProductsSection /> */}
+      {/* <OffersSection /> */}
+      {/* <ReviewsSection /> */}
       <NewsletterSection />
-      <FooterCTA />
+      {/* <FooterCTA /> */}
     </Box>
   );
 }

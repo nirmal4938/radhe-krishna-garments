@@ -12,14 +12,10 @@ import BootstrapErrorPage from "../pages/Bootstrap/BootstrapError";
 
 const initialBootstrap = {
   business: null,
-  settings: null,
-  theme: null,
   navigation: null,
   home: null,
   collections: [],
-  products: [],
-  offers: [],
-  reviews: [],
+  recommendedProducts: [],
   seo: null,
 };
 
